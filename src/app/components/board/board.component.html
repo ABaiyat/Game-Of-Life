@@ -1,0 +1,17 @@
+
+<!-- <div class="board">
+  <div class="row" *ngFor="let key of numbers">
+    <div class="cell" *ngFor="let key of numbers">
+
+    </div>
+  </div>
+</div> -->
+
+<table class="board">
+  <tr class="row" *ngFor="let rIndex of nRow">
+    <td class="cell" [attr.id]="'Cell-'+ rIndex +'-' +cIndex" (click)="changeCellState($event)"  *ngFor="let cIndex of nCol">
+
+    </td>
+  </tr>
+
+</table>

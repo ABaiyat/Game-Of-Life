@@ -1,0 +1,42 @@
+body {
+  color:purple;
+}
+
+.board {
+  margin:auto !important;
+  background:black;
+
+  margin:0;
+  padding:0;
+  border:0;
+  height:auto;
+}
+
+
+table {
+  border-spacing: 2px;
+  table-layout: fixed;
+  width:auto;
+}
+
+
+td {
+  border-style:none !important;
+  border-color:white !important;
+  background:darkgreen;
+  width:10px;
+  height:10px;
+  min-width: 10px;
+  min-height: 10px;
+}
+
+/*.cell {
+
+  padding:0;
+  margin:4px !important;
+  border-color: white;
+
+  background:darkgreen;
+  height:16px;
+  width:16px;
+}*/
