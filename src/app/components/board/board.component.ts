@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class BoardComponent implements OnInit {
   numOfRows:number;
   numOfCols:number;
-  simulationSpeed:number;
+  simulationSpeed:number = 1000;
   board2d:any = [];
   nextBoard:any = [];
   nCol:any = [];
@@ -17,6 +17,18 @@ export class BoardComponent implements OnInit {
   colId: number = 0;
   generationNum : number = 0;
   isSimRunning: boolean = false;
+  patternState: string = "Random";
+  selectedItem: string;
+
+  patterns = [
+    "Random",
+    "Pulsar",
+    "Glider Gun"
+  ]
+
+  speeds = [
+    1, 2, 3, 4, 5
+  ]
 
   constructor() {
     this.numOfRows = 30;
@@ -54,6 +66,52 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
     this.randomizeBoard();
     this.checkSimState();
+  }
+
+  changePattern(pattern) {
+    console.log(pattern);
+    this.patternState = pattern;
+
+    if (pattern === "Random") {
+      this.randomizeBoard();
+    }
+    else if (pattern === "Pulsar") {
+      this.update(this.pulsarPattern, 10, 20);
+    }
+    else if (pattern === "Glider Gun") {
+      this.update(this.gliderGunPattern, 5, 5);
+    }
+  }
+
+  pulsarPattern = [
+    [0,0], [0,1], [0,2], [0,6], [0,7], [0,8],
+    [5,0], [5,1], [5,2], [5,6], [5,7], [5,8],
+    [7,0], [7,1], [7,2], [7,6], [7,7], [7,8],
+    [12,0], [12,1], [12,2], [12,6], [12,7], [12,8],
+
+    [2,-2], [3,-2], [4,-2], [2,3], [3,3], [4,3],
+    [2,5], [3,5], [4,5], [2,10], [3,10], [4,10],
+    [8,-2], [9,-2], [10,-2], [8,3], [9,3], [10,3],
+    [8,5], [9,5], [10,5], [8,10], [9,10], [10,10]
+  ]
+
+  gliderGunPattern = [
+    [0,0], [0,1], [1,1], [1,0], [0,10], [1,10], [3,11], [4,12], [4,13],
+    [-1,11], [-2,12], [-2,13], [1,14], [-1,15], [0,16], [1,16], [2,16],
+    [3,15], [1,17], [0,20], [2,10], [-1,20], [-2,20], [0,21], [-1,21], [-2, 21],
+    [1,22], [-3,22], [-3,24], [-4,24], [1,24], [2,24], [-2,34], [-1,34],
+    [-1,35],[-2,35],
+  ]
+
+  update(pattern, colOff, rowOff) {
+    this.clearBoard();
+    for (var i = 0; i < pattern.length; i++) {
+      this.board2d[pattern[i][0] + colOff][pattern[i][1] + rowOff] = true;
+    }
+  }
+
+  changeSpeed(genPerSec) {
+    this.simulationSpeed = 1000/genPerSec;
   }
 
 
@@ -102,13 +160,9 @@ export class BoardComponent implements OnInit {
 
   }
 
-
-
   // Carries out the generation by generation simulation. Stores the
   // next generation's values in a temporary array to maintain correctness
   simGeneration() {
-
-
     for (var i = 0; i < this.numOfRows; i++) {
       for (var j = 0; j < this.numOfCols; j++) {
         var count = 0;
@@ -125,7 +179,6 @@ export class BoardComponent implements OnInit {
               if (k != 0 || l != 0) {
                 if (this.board2d[i+k][j+l]) {
                   count++;
-                  console.log("Neigbhor " + count + " of Cell " + i + "," + j + " at: " + (i+k) + "," + (j+l));
                 }
               }
             }
@@ -159,7 +212,6 @@ export class BoardComponent implements OnInit {
           }
         }
         if (this.nextBoard[i][j]) {
-          console.log("THIS CELL IS ACTIVE:" + i + "," + j);
         }
       }
     }
@@ -175,7 +227,8 @@ export class BoardComponent implements OnInit {
 
       setTimeout(()=> {
         this.simGeneration();
-      }, 200);
+        console.log(this.simulationSpeed);
+      }, this.simulationSpeed);
     }
 
 

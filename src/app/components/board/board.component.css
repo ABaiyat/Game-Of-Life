@@ -1,5 +1,5 @@
 body {
-  color:purple;
+  background-color: green !important;
 }
 
 .board {
@@ -9,10 +9,17 @@ body {
   background:#2F2F2F;
   border-style:solid;
   border-color:#2F2F2F;
-  border-width:2px;
+  border-width:5px;
   height:auto;
 }
 
+button {
+  background: black;
+  color:white;
+  outline:none;
+  border:none;
+  font-size:1rem;
+}
 
 table {
   border-spacing: 1px;
