@@ -15,6 +15,8 @@ export class BoardComponent implements OnInit {
   nRow:any = [];
   rowId: number = 0;
   colId: number = 0;
+  generationNum : number = 0;
+  isSimRunning: boolean = false;
 
   constructor() {
     this.numOfRows = 30;
@@ -49,7 +51,10 @@ export class BoardComponent implements OnInit {
 
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.randomizeBoard();
+    this.checkSimState();
+  }
 
 
   // When a cell is clicked, changes to the opposite state of what it
@@ -66,7 +71,11 @@ export class BoardComponent implements OnInit {
     return this.board2d[rowIndex - 1][colIndex - 1];
   }
 
+  // Sets all of the values of the board array to false, essentially clearing
+  // the board
   clearBoard() {
+    this.generationNum = 0;
+    this.isSimRunning = false;
     for (var i = 0; i < this.numOfRows; i++) {
       for (var j = 0; j < this.numOfCols; j++) {
         this.board2d[i][j] = false;
@@ -74,17 +83,40 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  checkBoard() {
-    console.log("State of Board: ", this.board2d);
+  // Creates a randomized board
+  randomizeBoard() {
+    this.generationNum = 0;
+    this.isSimRunning = false;
+    for (var i = 0; i < this.numOfRows; i++) {
+      for (var j = 0; j < this.numOfCols; j++) {
+        this.board2d[i][j] = Math.random() > .3 ? false : true;
+      }
+    }
   }
 
-  startSim() {
-    console.log("Before Simulation:", this.board2d);
+  checkSimState() {
+    this.isSimRunning = !this.isSimRunning;
+    if (this.isSimRunning) {
+      this.simGeneration();
+    }
+
+  }
+
+
+
+  // Carries out the generation by generation simulation. Stores the
+  // next generation's values in a temporary array to maintain correctness
+  simGeneration() {
+
+
     for (var i = 0; i < this.numOfRows; i++) {
       for (var j = 0; j < this.numOfCols; j++) {
         var count = 0;
+        // Used to check the values of neighbors
         for (var k = -1; k <= 1; k++) {
           for (var l = -1; l <= 1; l++) {
+            // Ensures the neighbor being checked is within the boundaries
+            // of the board
             if (i+k >= 0 && i+k < this.numOfRows
               && j+l >= 0 && j+l < this.numOfCols) {
               // Does not count the current cell whose neighbors are being
@@ -131,17 +163,20 @@ export class BoardComponent implements OnInit {
         }
       }
     }
-    //this.board2d = this.nextBoard;
-    for (var i = 0; i < this.numOfRows; i++) {
-      for (var j = 0; j < this.numOfCols; j++) {
-        this.board2d[i][j] = this.nextBoard[i][j];
+
+    // Sets the values of the next generation
+    if (this.isSimRunning) {
+      for (var i = 0; i < this.numOfRows; i++) {
+        for (var j = 0; j < this.numOfCols; j++) {
+          this.board2d[i][j] = this.nextBoard[i][j];
+        }
       }
+      this.generationNum++;
+
+      setTimeout(()=> {
+        this.simGeneration();
+      }, 200);
     }
-
-
-    console.log("After Sim: ", this.nextBoard);
-
-
 
 
   }
