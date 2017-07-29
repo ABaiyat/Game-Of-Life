@@ -4,17 +4,18 @@ body {
 
 .board {
   margin:auto !important;
-  background:black;
-
   margin:0;
   padding:0;
-  border:0;
+  background:#2F2F2F;
+  border-style:solid;
+  border-color:#2F2F2F;
+  border-width:2px;
   height:auto;
 }
 
 
 table {
-  border-spacing: 2px;
+  border-spacing: 1px;
   table-layout: fixed;
   width:auto;
 }
@@ -23,11 +24,15 @@ table {
 td {
   border-style:none !important;
   border-color:white !important;
-  background:darkgreen;
+  background:#800000;
   width:10px;
   height:10px;
   min-width: 10px;
   min-height: 10px;
+}
+
+.on {
+  background:black;
 }
 
 /*.cell {

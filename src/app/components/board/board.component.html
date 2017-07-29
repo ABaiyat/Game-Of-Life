@@ -7,11 +7,19 @@
   </div>
 </div> -->
 
-<table class="board">
-  <tr class="row" *ngFor="let rIndex of nRow">
-    <td class="cell" [attr.id]="'Cell-'+ rIndex +'-' +cIndex" (click)="changeCellState($event)"  *ngFor="let cIndex of nCol">
 
-    </td>
-  </tr>
+  <table class="board">
+    <tr class="row" *ngFor="let rIndex of nRow">
+      <td class="cell" [attr.id]="'Cell-'+ rIndex +'-' +cIndex"
+      (click)="changeCellState(rIndex, cIndex)"  *ngFor="let cIndex of nCol"
+      [style.background]="checkState(rIndex, cIndex) ? 'red': 'black'"
+      >
 
-</table>
+      </td>
+    </tr>
+
+  </table>
+
+  <button (click)="startSim()">Run</button>
+  <button (click)="clearBoard()">Clear</button>
+  <button (click)="checkBoard()">Check</button>
