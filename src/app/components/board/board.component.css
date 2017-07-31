@@ -1,5 +1,27 @@
-body {
-  background-color: green !important;
+.title {
+  text-align: center;
+  font-family:"Roboto";
+  color:white;
+}
+
+.buttonRow {
+  text-align: center;
+  display:inline-block;
+  margin:auto 0 !important;
+  padding:10px;
+  background:#2F2F2F;
+}
+
+.generationCount  {
+  padding-left: 20px;
+  text-align: left;
+  float:right;
+  display: inline-block;
+  margin:0;
+  color:white;
+  font-family:Roboto;
+  width:170px !important;
+  line-height: 30px;
 }
 
 .board {
@@ -10,23 +32,84 @@ body {
   border-style:solid;
   border-color:#2F2F2F;
   border-width:5px;
+  border-radius:5px;
+  display:inline-block;
   height:auto;
 }
 
-button {
-  background: black;
+.fa {
   color:white;
-  outline:none;
-  border:none;
-  font-size:1rem;
 }
+
+button {
+  font-family:Roboto;
+  background:white;
+  outline:none;
+  padding:2px;
+  margin-right: 1px;
+  border-style: solid !important;
+  border-color:black;
+  border-width: 2px !important;
+  border-radius: 5px;
+  font-size:1rem;
+  height:30px;
+  width:60px;
+}
+
+button:active {
+  border-color: black !important;
+}
+
+button:hover {
+  background:black;
+  color:white;
+}
+
+select {
+  font-family: Roboto;
+  font-size:1rem;
+  padding:0;
+  height:30px;
+  outline:none;
+  width:105px;
+  border-width:2px;
+  border-radius:5px;
+  border-color:black;
+}
+
+select:hover, select:active, select:focus {
+  outline:none;
+  background:black;
+  color:white;
+}
+
+option {
+  border-radius:5px;
+}
+
+option:hover {
+  outline:none;
+  background:black;
+  color:white;
+}
+
+select option:checked:after {
+    content: attr(title);
+    background: #666;
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    border: none;
+}
+
+
 
 table {
   border-spacing: 1px;
   table-layout: fixed;
   width:auto;
 }
-
 
 td {
   border-style:none !important;
@@ -36,6 +119,7 @@ td {
   height:10px;
   min-width: 10px;
   min-height: 10px;
+  border-radius:2px;
 }
 
 .on {

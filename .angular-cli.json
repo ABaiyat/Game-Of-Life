@@ -19,7 +19,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/font-awesome/css/font-awesome.css",
+        "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -54,7 +56,8 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
-    "component": {}
+    "styleExt": "scss",
+    "component": {
+    }
   }
 }

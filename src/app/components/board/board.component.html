@@ -1,38 +1,35 @@
-
-<!-- <div class="board">
-  <div class="row" *ngFor="let key of numbers">
-    <div class="cell" *ngFor="let key of numbers">
-
-    </div>
-  </div>
-</div> -->
+<h1 class="title">Game Of Life</h1>
 
 
-  <table class="board">
+
+<div class="board">
+
+  <table>
     <tr class="row" *ngFor="let rIndex of nRow">
-      <td class="cell" [attr.id]="'Cell-'+ rIndex +'-' +cIndex"
-      (click)="changeCellState(rIndex, cIndex)"  *ngFor="let cIndex of nCol"
-      [style.background]="checkState(rIndex, cIndex) ? 'red': 'black'"
-      >
-
+      <td class="cell" [attr.id]="'Cell-'+ rIndex +'-' +cIndex" (click)="changeCellState(rIndex, cIndex)" *ngFor="let cIndex of nCol" [style.background]="checkState(rIndex, cIndex) ? '#9C1111': 'black'">
       </td>
     </tr>
-
   </table>
 
-  <button (click)="checkSimState()">Run</button>
-  <button (click)="clearBoard()">Clear</button>
+  <div class="buttonRow">
+    <button (click)="run()">Run</button>
+    <button (click)=pause()>Pause</button>
+    <button (click)="clearBoard()">Clear</button>
 
-  <select (change)="changePattern($event.target.value)">
-    <option *ngFor="let pattern of patterns">
-      {{pattern}}
-    </option>
-  </select>
+    <select (change)="changeSpeed($event.target.value)">
+      <option *ngFor="let speed of speeds">
+        {{speed}}
+      </option>
+    </select>
 
-  <select (change)="changeSpeed($event.target.value)">
-    <option value="" disabled selected>Gen Per Second</option>
-    <option *ngFor="let speed of speeds">
-      {{speed}}
-    </option>
-  </select>
-  <h1>Generation: {{ generationNum }}</h1>
+    <select (change)="changePattern($event.target.value)">
+      <option *ngFor="let pattern of patterns">
+        {{pattern}}
+      </option>
+    </select>
+    <i (click)="refresh()" class="fa fa-refresh"></i>
+
+    <h3 class="generationCount">Generation: {{ generationNum }}</h3>
+  </div>
+
+</div>
