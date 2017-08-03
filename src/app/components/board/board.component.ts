@@ -98,7 +98,6 @@ export class BoardComponent implements OnInit {
   // Changes the pattern when a new pattern is selected, or reinitializes the
   // selected pattern when the refresh icon is clicked
   changePattern(pattern) {
-    console.log(pattern);
     this.patternState = pattern;
 
     if (pattern === "Random") {
@@ -124,6 +123,7 @@ export class BoardComponent implements OnInit {
 
   // Changes simulation speed when a new speed is selected
   changeSpeed(genPerSec) {
+    genPerSec = parseInt(genPerSec);
     this.simulationSpeed = 1000/genPerSec;
   }
 
